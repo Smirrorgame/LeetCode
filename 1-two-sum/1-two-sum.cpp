@@ -2,17 +2,26 @@ class Solution {
 public:
     vector<int> twoSum(vector<int> &nums, int target)
     {
-        for (int i = 0; i < nums.size(); i++)
+        map<int, int> myMap;
+        for (size_t key = 0; key < nums.size(); key++)
         {
-            for (int j = i + 1; j < nums.size(); j++)
+            int expected = target - nums[key];
+            // cout << "searching for " << target << "-" << nums[key] << "=" << expected << endl;
+            map<int, int>::iterator required = myMap.find(expected);
+            if (required == myMap.end())
             {
-                // cout << "i:" << i << " j:" << j << endl;
-                if (nums[i] + nums[j] == target)
-                {
-                    vector<int> ret = {i, j};
-                    return ret;
-                }
+                // cout << "Not found!" << endl;
+                // cout << "inserting value " << nums[key] << " to key " << key << endl
+                     // << endl;
+                myMap[nums[key]] = key;
+                // myMap.insert(std::pair<int, int>(key, nums[key]));
             }
-        }return {};
+            else
+            {
+                // cout << "found at " << required->second << endl;
+                return {(int)key, required->second};
+            }
+        }
+        return vector<int>();
     }
 };
