@@ -1,50 +1,63 @@
-#include <map>
 #include <string>
-using namespace std;
+using std::string;
 
-
-class Solution {
-private:
-    map<char, int> myMap = {{'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}};
-
+class Solution
+{
 public:
-    int romanToInt(const string s)
+    int romanToInt(string s)
     {
-        // cout << endl;
-        int sum = 0;
-        for (int i = 0; i < s.length(); i++)
+        int n = int(s.length());
+        if (0 == n)
         {
-            const char c = s[i];
-            sum += myMap[c];
-            if (c == 'I' && i < s.length() + 1)
+            return 0;
+        }
+
+        int result = 0;
+        for (int i = 0; i < n; i++)
+        {
+            switch (s[i])
             {
-                if (s[i + 1] == 'V' || s[i + 1] == 'X')
-                {
-                    sum += myMap[s[i + 1]];
-                    sum -= 2 * myMap[c];
-                    i++;
-                }
-            }
-            else if (c == 'X' && i < s.length() + 1)
-            {
-                if (s[i + 1] == 'L' || s[i + 1] == 'C')
-                {
-                    sum += myMap[s[i + 1]];
-                    sum -= 2 * myMap[c];
-                    i++;
-                }
-            }
-            else if (c == 'C' && i < s.length() + 1)
-            {
-                if (s[i + 1] == 'D' || s[i + 1] == 'M')
-                {
-                    sum += myMap[s[i + 1]];
-                    sum -= 2 * myMap[c];
-                    i++;
-                }
+            case 'I':
+                result += 1;
+                break;
+            case 'V':
+                result += 5;
+                break;
+            case 'X':
+                result += 10;
+                break;
+            case 'L':
+                result += 50;
+                break;
+            case 'C':
+                result += 100;
+                break;
+            case 'D':
+                result += 500;
+                break;
+            case 'M':
+                result += 1000;
+                break;
             }
         }
 
-        return sum;
+        for (int i = 1; i < n; i++)
+        {
+            if ((s[i] == 'V' || s[i] == 'X') && s[i - 1] == 'I')
+            {
+                result -= 1 + 1;
+            }
+
+            if ((s[i] == 'L' || s[i] == 'C') && s[i - 1] == 'X')
+            {
+                result -= 10 + 10;
+            }
+
+            if ((s[i] == 'D' || s[i] == 'M') && s[i - 1] == 'C')
+            {
+                result -= 100 + 100;
+            }
+        }
+        return result;
     }
 };
