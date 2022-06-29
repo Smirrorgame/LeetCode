@@ -28,9 +28,8 @@ public:
                 l1 = l1->next;
             }
             sum += carry;
-            int newVal = sum % 10;
-            carry = (int)(sum / 10);
-            ListNode *node = new ListNode(newVal);
+            carry = sum / 10;
+            ListNode *node = new ListNode(sum % 10);
             temp->next = node;
             temp = temp->next;
         }
