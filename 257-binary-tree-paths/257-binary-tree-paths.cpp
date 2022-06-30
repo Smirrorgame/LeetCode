@@ -14,10 +14,10 @@ class Solution {
 private:
     void calc(TreeNode *node, string s, vector<string> &ret)
     {
-        if (node == nullptr)
+        if (!node)
             return;
         s += to_string(node->val);
-        if (node->left == nullptr && node->right == nullptr)
+        if (!node->left && !node->right)
         {
             ret.push_back(s);
             return;
@@ -25,7 +25,7 @@ private:
         // s += "->";
         calc(node->left, s+"->", ret);
         calc(node->right, s+"->", ret);
-        return;
+        // return;
     }
     
 public:
