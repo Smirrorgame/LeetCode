@@ -17,21 +17,21 @@ private:
         if (node == nullptr)
             return;
         s += to_string(node->val);
-        if (node->left == NULL && node->right == NULL)
+        if (node->left == nullptr && node->right == nullptr)
         {
             ret.push_back(s);
             return;
         }
-        s += "->";
-        calc(node->left, s, ret);
-        calc(node->right, s, ret);
+        // s += "->";
+        calc(node->left, s+"->", ret);
+        calc(node->right, s+"->", ret);
+        return;
     }
     
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> ret;
-        string s = "";
-        calc(root, s, ret);
+        calc(root, "", ret);
         return ret;
     }
 };
