@@ -1,16 +1,16 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        map<int, int> entries;
-        for (int i = 0; i < nums.size(); i++)
+        map<int, int> entryCount;
+        for (int i = 0; i < (int)nums.size(); i++)
         {
-            if (entries.find(nums[i]) != entries.end())
+            if (entryCount.count(nums[i]) == 0)
             {
-                return true;
+                entryCount[nums[i]]++;
             }
             else
             {
-                entries.insert(pair<int, int>(nums[i], i));
+                return true;
             }
         }
         return false;
